@@ -20,15 +20,7 @@ function registrationUser(req, res, next) {
       password: hash,
       name,
     }))
-    .then((user) => {
-      const { _id } = user;
-
-      return res.status(201).send({
-        email,
-        name,
-        _id,
-      });
-    })
+    .then((user) => res.status(201).send(user))
     .catch((err) => {
       if (err.code === 11000) {
         next(new DuplicateError('Пользователь уже зарегистрирован'));

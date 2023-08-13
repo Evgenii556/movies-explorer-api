@@ -65,7 +65,7 @@ function deleteMovie(req, res, next) {
       }
       return movie.deleteOne();
     })
-    .then(() => res.send({ message: 'Фильм удален' }))
+    .then(() => res.send({ message: 'Успешное удаление фильма' }))
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new InvalidError('Некорректный запрос к серверу'));
