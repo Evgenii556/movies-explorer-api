@@ -14,7 +14,7 @@ mongoose.set('strictQuery', true);
 
 const app = express();
 
-const allowedCors = ['https://superproject.mesto.nomoredomains.xyz', 'http://localhost:3000'];
+const allowedCors = ['https://films-and-movies.me.nomoreparties.co', 'http://localhost:3000'];
 
 const corsOptions = {
   origin: allowedCors,
