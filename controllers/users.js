@@ -20,7 +20,7 @@ function registrationUser(req, res, next) {
       password: hash,
       name,
     }))
-    .then((user) => res.status(201).send(user))
+    .then((user) => res.status(201).send({ email: user.email }))
     .catch((err) => {
       if (err.code === 11000) {
         next(new DuplicateError('Пользователь уже зарегистрирован'));
@@ -47,7 +47,7 @@ function loginUser(req, res, next) {
 }
 
 function getUserInfoId(req, res, next) {
-  const { id } = req.params;
+  const id = req.user;
 
   User.findById(id)
     .then((user) => {

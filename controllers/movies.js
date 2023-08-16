@@ -5,7 +5,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const InvalidError = require('../errors/InvalidError');
 
 function getMovies(req, res, next) {
-  Movie.find({ owner: req.user._id })
+  Movie.find({ owner: req.user })
     .then((movies) => res.send(movies))
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -42,7 +42,7 @@ function addMovie(req, res, next) {
     trailerLink,
     nameRU,
     nameEN,
-    owner: req.user._id,
+    owner: req.user,
   })
     .then((movie) => res.send(movie))
     .catch((err) => {
@@ -55,12 +55,12 @@ function addMovie(req, res, next) {
 }
 
 function deleteMovie(req, res, next) {
-  Movie.findById(req.params.movieId)
+  Movie.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
         throw new NotFoundError('Фильм не существует');
       }
-      if (!movie.owner.equals(req.user._id)) {
+      if (!movie.owner.equals(req.user)) {
         throw new AccessError('Нет прав доступа');
       }
       return movie.deleteOne();

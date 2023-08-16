@@ -22,7 +22,6 @@ module.exports.auth = (req, _, next) => {
   } catch (err) {
     return next(new AuthError(`${errorMessage}!`));
   }
-
   req.user = payload._id;
   return next();
 };

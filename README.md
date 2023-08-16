@@ -4,4 +4,4 @@
 
 IP сервера: 158.160.23.228
 
-адрес: http://api.films-and-movies.me.nomoreparties.co
+адрес: https://api.films-and-movies.me.nomoreparties.co
