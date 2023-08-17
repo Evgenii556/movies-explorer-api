@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const router = require('./routes/index');
 const errorHandler = require('./middlewares/errorHandler');
+const { DataBaseUrl } = require('./utils/constants');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
@@ -34,7 +35,7 @@ app.use(errors());
 app.use(errorHandler);
 
 mongoose
-  .connect('mongodb://127.0.0.1:27017/bitfilmsdb')
+  .connect(DataBaseUrl)
   .then(() => {
     console.log('Успешное подключение');
   })

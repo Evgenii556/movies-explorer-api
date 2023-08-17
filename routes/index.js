@@ -30,6 +30,6 @@ router.post(
 router.use('/users', auth, usersRouter);
 router.use('/movies', auth, moviesRouter);
 
-router.all('*', (req, res, next) => next(new NotFoundError('Запрашиваемый ресурс не найден.')));
+router.all('*', auth, (req, res, next) => next(new NotFoundError('Запрашиваемый ресурс не найден.')));
 
 module.exports = router;
