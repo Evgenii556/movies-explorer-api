@@ -76,7 +76,11 @@ function editUserInfo(req, res, next) {
       new: true,
       runValidators: true,
     },
-  )
+  ).catch((err) => {
+    if (err.code === 11000) {
+      next(new DuplicateError('Пользователь уже зарегистрирован'));
+    }
+  })
     .then((user) => {
       if (user) return res.send(user);
       throw new NotFoundError('Пользователь не найден');
